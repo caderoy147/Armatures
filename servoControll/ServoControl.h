@@ -10,5 +10,6 @@ void initializeServos();  // Function to initialize all servos
 void initServo(int index, int pin);
 void setSpeed(int index, int speed);
 void moveServoSmooth(int index, int target);
+void controlClaw(bool status, int width);
 
 #endif

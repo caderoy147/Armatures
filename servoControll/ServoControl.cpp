@@ -10,7 +10,7 @@ void initializeServos() {
     initServo(2, 6);
     initServo(3, 9);
     initServo(4, 10);
-   // initServo(5, 11); // Special: Claw (0-65 degrees)
+    initServo(5, 11); // Special: Claw (0-65 degrees)
    // servo 5 initialized at claw block
 }
 
@@ -21,7 +21,7 @@ void initServo(int index, int pin) {
             currentAngle[index] = 65;  // Start at max allowed angle for the claw
         }
         servos[index].write(currentAngle[index]);  
-        delay(500);
+        delay(1000);
     }
 }
 
@@ -60,3 +60,10 @@ void moveServoSmooth(int index, int target) {
         currentAngle[index] = target;
     }
 }
+
+void controlClaw(bool status, int width) {
+    width = constrain(width, 0, 65); // Keep within limits
+    int targetAngle = status ? width : (65 - width); // Open moves to width, close moves opposite
+    moveServoSmooth(5, targetAngle);
+}
+
