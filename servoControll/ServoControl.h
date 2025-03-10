@@ -39,5 +39,7 @@ void initServo(int index, int pin);
 void setSpeed(int index, int speed);
 void moveServoSmooth(int index, int target);
 void controlClaw(bool status, int width);
+void setupLeds();
+void setLed(uint8_t body, bool state);
 
 #endif

@@ -4,11 +4,14 @@
 void setup() {
     initializeServos();
     setSpeed(5, 10);  // Medium speed for the claw
+    setupLeds();
 }
 
 void loop() {
-    controlClaw(true, 50); // Open claw to 50 degrees
-    delay(2000);
-    controlClaw(false, 0); // Close claw fully
-    delay(2000);
+    for (uint8_t i = 0; i < 6; i++) {
+        setLed(i, HIGH);
+        delay(500);
+        setLed(i, LOW);
+        delay(500);
+    }
 }

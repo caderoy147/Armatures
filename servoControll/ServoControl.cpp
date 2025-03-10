@@ -4,6 +4,10 @@ Servo servos[MAX_SERVOS];
 int currentAngle[MAX_SERVOS] = {0};  // Default start at 0 degrees
 int speedDelay[MAX_SERVOS] = {10};
 
+// Pin mapping based on body index
+const uint8_t pinMap[] ={2,4,7,8,12,13};
+
+
 void initializeServos() {
     initServo(0, 3);
     initServo(1, 5);
@@ -67,3 +71,19 @@ void controlClaw(bool status, int width) {
     moveServoSmooth(5, targetAngle);
 }
 
+
+//led control
+
+
+void setupLeds() {
+    for (uint8_t i = 0; i < sizeof(pinMap) / sizeof(pinMap[0]); i++) {
+        pinMode(pinMap[i], OUTPUT);
+        digitalWrite(pinMap[i], LOW); // Initialize all as LOW
+    }
+}
+
+void setLed(uint8_t body, bool state) {
+    if (body < sizeof(pinMap) / sizeof(pinMap[0])) {
+        digitalWrite(pinMap[body], state ? HIGH : LOW);
+    }
+}
